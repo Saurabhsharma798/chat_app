@@ -4,11 +4,11 @@ from services.langchain_gemini import generate_response
 from models.chat_model import Message
 from core.config import get_db
 from  sqlalchemy.orm import Session
+from fastapi.responses import JSONResponse
 
 
 router = APIRouter()
 
-# messages=[]
 
 @router.get('/')
 def home():
@@ -18,6 +18,7 @@ def home():
 @router.post("/chat",response_model=ChatResponse)
 def chat(data:ChatRequest,db:Session = Depends(get_db)):
     msg = data.content
+
     user_message = Message(
         role="USER",
         content=msg
@@ -34,4 +35,5 @@ def chat(data:ChatRequest,db:Session = Depends(get_db)):
     db.add(ai_message)
     db.commit()
     db.refresh(ai_message)
-    return {'content':output}
+    # return {'content':output}
+    return JSONResponse(content=output)    

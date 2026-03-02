@@ -14,5 +14,5 @@ model = ChatGoogleGenerativeAI(
 
 def generate_response(message:str):
     response=model.invoke(message)
-    return response.content
+    return response
 
