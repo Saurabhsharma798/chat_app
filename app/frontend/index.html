@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style1.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+<title>Chatbot</title>
+
+</head>
+
+<body class="bg-black flex justify-center itmes-center">
+    <div class="history absolute left-0 h-auto min-h-200 bg-white/20 rounded-xl p-2  w-[20%] m-5 text-white  fixed ">
+        <div id="newChat" class="bar flex justify-center bg-black rounded-xl p-2" onclick="newChat()">New chat</div>
+        <div class="text-white/50 ps-5 pt-2">Your Chat</div>
+
+        <div id="history-container" class="history-container bg-white-100 h-auto rounded-md">
+            
+    
+        </div>
+
+    </div>
+    <div class="left-150 main-box  text-white w-230  min-h-210 max-h-auto bg-blue-200/10 p-2 mt-5 rounded-lg">
+        <div id="message">
+            <div id="user" class="user-box ">
+            </div>
+            <div id="ai" class=" output ">
+            </div>
+        </div>
+        <div>
+        </div>
+        <h1 id="container"></h1>
+        <div class="flex border border-white/10  rounded-2xl bg-white/10 text-white mt-160  ">
+            <div class="px-2 flex items-center ">
+                <input
+                    class="w-215 border-0 bg-transparent p-2 focus:outline-none focus:ring-0 focus:ring-offset-0 transition-all duration-300"
+                    id="username" type="text" placeholder="Enter anything" />
+                <button class="bg-white w-5 h-5 rounded-xl" id="btn" onclick="myfunc()"></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>
+
+<!-- min-w-50 min-h-8 max-h-500 max-w-200 bg-white/10 bottom-180 rounded-lg text-white/80 flex text-ld items-center font-style: italic ps-3 ms-150 hover:bg-white/20 hover:text-white -->

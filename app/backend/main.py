@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from api.routes.chat_route import router
 from fastapi.middleware.cors import CORSMiddleware
-from models.chat_model import Base,engine
+from core.config import Base,engine
 
 
 
