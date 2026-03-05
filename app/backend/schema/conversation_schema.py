@@ -6,5 +6,5 @@ class ConversationRequest(BaseModel):
 
 
 class ConversationResponse(BaseModel):
-    conversation_id:int
+    # conversation_id:int
     content:list

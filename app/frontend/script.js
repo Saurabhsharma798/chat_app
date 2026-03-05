@@ -100,7 +100,7 @@
  
 const messages = [[]];
 let id = 0;
- 
+ loadChat(id)
 const message = document.getElementById("message");
  
  
@@ -119,10 +119,10 @@ function createNewChat(id) {
 createNewChat(id);
  
  
-function switchChat(chatId) {
+async function switchChat(chatId) {
     id=chatId;
-    loadChat(id);
-    renderMessages();
+    await loadChat(id);
+    // renderMessages();
 }
  
  
@@ -138,15 +138,16 @@ async function loadChat(id) {
         })
         console.log("chat fetched")
         const data= await response.json()
-        id=data.conversation_id
-        for (const d in data.content){
+        // id=data.conversation_id
+        messages[id]=[]
+        for (const d of data.content){
             msg_role=d.role;
             msg_text=d.msg;
  
             messages[id].push({role:msg_role,text:msg_text})
-            
         }
         console.log(messages)
+        renderMessages();
         
     }
     catch (error){
@@ -159,12 +160,12 @@ async function loadChat(id) {
 async function myfunc() {
     // let mainBox = [];
     const username = input_field.value;
- 
-    // messages[id].push({ role: 'user', text: username })
+    messages[id]=[]
+    messages[id].push({ role: 'USER', text: username })
  
     input_field.value = "";
  
- 
+    
     try {
         const response = await fetch("http://192.168.29.119:8000/chat", {
             method: "POST",
@@ -177,16 +178,19 @@ async function myfunc() {
         console.log('here')
  
         console.log('here also')
-        const data = response.json();
-        // messages[id].push({ role: 'ai', text: data.content })
- 
+        const data = await response.json();
+        
+        messages[id].push({ role: 'AI', text: data.content })
+        loadChat(id);
         console.log(messages);
-        renderMessages();
+        // renderMessages();
+        // messages[id].push(ma);
     }
- 
+    
     catch (error) {
         console.log(error);
     }
+    
 }
 function renderMessages() {
     const message = document.getElementById("message");
@@ -196,6 +200,7 @@ function renderMessages() {
         const div = document.createElement("div");
         div.className = msg.role === "USER" ? "user-box" : "output";
         div.textContent = msg.text;
+        console.log(msg.text)
  
         message.appendChild(div);
     });
@@ -215,7 +220,8 @@ function newChat() {
     message.innerHTML = "";
     messages[id] = [];
     createNewChat(id);
-    renderMessages();
+    // renderMessages();
+    loadChat(id);
  
 }
 
